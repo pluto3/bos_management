@@ -1,0 +1,63 @@
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		 xsi:noNamespaceSchemaLocation="../config/ehcache.xsd">
+	<!-- 
+	硬盘上缓存的临时目录 
+    maxElementsInMemory:内存中最大存放的元素的个数
+    eternal：是否永生，默认是false
+    timeToIdleSeconds：发呆闲置的时间，超过该时间，被清除，单位秒
+    timeToLiveSeconds：存活的事件，超过该时间被清除
+    maxElementsOnDisk：如果内存满了，溢出到硬盘上的临时目录中的存放的元素的个数
+    diskExpiryThreadIntervalSeconds：轮询时间，巡视组
+    memoryStoreEvictionPolicy：内存对象的清理策略，如果满了，怎么办?
+   	 策略有三个：LRU、LFU、FIFO
+    LRU:最少使用被清理，次数
+    LFU：时间，闲置最长的时间
+    FIFO：管道策略，先进先出
+     -->
+		 
+    <diskStore path="java.io.tmpdir"/>
+    <defaultCache
+            maxElementsInMemory="10000"
+            eternal="false"
+            timeToIdleSeconds="120"
+            timeToLiveSeconds="120"
+            maxElementsOnDisk="10000000"
+            diskExpiryThreadIntervalSeconds="120"
+            memoryStoreEvictionPolicy="LRU">
+        <persistence strategy="localTempSwap"/>
+    </defaultCache>
+    <!-- Spring整合的菜单缓存 -->
+     <cache name="bos_menu_cache"
+            maxElementsInMemory="10000"
+            eternal="false"
+            timeToIdleSeconds="120"
+            timeToLiveSeconds="120"
+            maxElementsOnDisk="10000000"
+            diskExpiryThreadIntervalSeconds="120"
+            memoryStoreEvictionPolicy="LRU">
+        <persistence strategy="localTempSwap"/>
+    </cache>
+    <!-- Shiro权限缓存-认证 -->
+     <cache name="bos_realm_authentication_cache"
+            maxElementsInMemory="10000"
+            eternal="false"
+            timeToIdleSeconds="120"
+            timeToLiveSeconds="120"
+            maxElementsOnDisk="10000000"
+            diskExpiryThreadIntervalSeconds="120"
+            memoryStoreEvictionPolicy="LRU">
+        <persistence strategy="localTempSwap"/>
+    </cache>
+    <!-- Shiro权限缓存-授权 -->
+     <cache name="bos_realm_authorization_cache"
+            maxElementsInMemory="10000"
+            eternal="false"
+            timeToIdleSeconds="120"
+            timeToLiveSeconds="120"
+            maxElementsOnDisk="10000000"
+            diskExpiryThreadIntervalSeconds="120"
+            memoryStoreEvictionPolicy="LRU">
+        <persistence strategy="localTempSwap"/>
+    </cache>
+    
+</ehcache>
